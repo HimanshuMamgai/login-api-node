@@ -11,20 +11,16 @@ const signup = async (req, res) => {
     });
 
     try {
-        const foundUsername = await User.findOne({username: user.username});
-        if(foundUsername != null) {
-            await user.save((err, user) => {
-                if(err) {
-                    console.log(err.message);
-                } else {
-                    res.status(201).json(user);
-                }
-            });
-        } else {
-            res.status(406).json({message: 'Username already exist!'});
-        }
+        await user.save((err, user) => {
+            if(err) {
+                console.log(err.message);
+            } else {
+                res.render('secret', {user: user});
+            }
+        });
     } catch(err) {
-        res.status(500).json({err: err.message});
+        console.log(err);
+        res.redirect('/auth/signup');
     }
 };
 
@@ -35,12 +31,12 @@ const login = async (req, res) => {
             password: req.body.password
         });
         if(user === null) {
-            res.status(404).json({message: 'No user found!'});
+            res.render('home', {err: 'No user found!', btn: 'Login'});
         } else {
-            res.status(200).json(user);
+            res.render('secret', {user: user});
         }
     } catch(err) {
-        res.status(500).json({err: err.message});
+        console.log(err);
     }
 };
 

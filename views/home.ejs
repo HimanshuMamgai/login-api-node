@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment || Home</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+</head>
+<body>
+    <div class="form-container" <% if(btn == "Login" || btn == "Signup") { %>  style="display: none;" <% } %>>
+        <h2>Just Login or Signup to continue</h2>
+        <form action="/getForm" method="post">
+            <input type="submit" name="homeBtn" class="btn" value="Login">
+            <input type="submit" name="homeBtn" class="btn" value="Signup">
+        </form>
+    </div>
+    <% if(btn == "Signup") { %>
+        <div class="form-container">
+            <button>
+                <a href="/">Home</a>
+            </button>
+            <h2>Signup</h2>
+            <form action="/auth/signup" method="post">
+                <input type="text" name="name" placeholder="Enter your name">
+                <input type="email" name="email" placeholder="Enter your email">
+                <input type="text" name="username" placeholder="Create a username">
+                <input type="password" name="password" placeholder="Create a password">
+                <button type="submit">
+                    SIGNUP
+                </button>
+            </form>
+        </div>
+    <% } if(btn == "Login") { %>
+        <div class="form-container">
+            <button>
+                <a href="/">Home</a>
+            </button>
+            <h2>Login</h2>
+            <form action="/auth/login" method="post">
+                <input type="text" name="username" placeholder="Enter your username">
+                <input type="password" name="password" placeholder="Enter your password">
+                <button type="submit">
+                    LOGIN
+                </button>
+            </form>
+        </div>
+    <% } %>
+</body>
+</html>
